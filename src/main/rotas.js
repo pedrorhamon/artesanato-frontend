@@ -4,11 +4,12 @@ import Login from '../views/login'
 import Home from '../views/home'
 import CadastroUsuario from '../views/cadastroUsuario'
 import ConsultaPecas from '../views/lancamentos/consulta-pecas'
-import CadastroLancamentos from '../views/lancamentos/cadastro-lancamentos'
+import CadastroPecas from '../views/lancamentos/cadastro-pecas'
 import LandingPage from '../views/landingPage'
 import { AuthConsumer } from '../main/provedorAutenticacao'
 
 import { Route, Switch, BrowserRouter, Redirect } from 'react-router-dom'
+
 
 function RotaAutenticada( { component: Component, isUsuarioAutenticado, ...props } ){
     return (
@@ -36,7 +37,7 @@ function Rotas(props){
                 
                 <RotaAutenticada isUsuarioAutenticado={props.isUsuarioAutenticado} path="/home" component={Home} />
                 <RotaAutenticada isUsuarioAutenticado={props.isUsuarioAutenticado} path="/consulta-pecas" component={ConsultaPecas} />
-                <RotaAutenticada isUsuarioAutenticado={props.isUsuarioAutenticado} path="/cadastro-pecas/:id?" component={CadastroLancamentos} />
+                <RotaAutenticada isUsuarioAutenticado={props.isUsuarioAutenticado} path="/cadastro-pecas/:id?" component={CadastroPecas} />
             </Switch>
         </BrowserRouter>
     )
