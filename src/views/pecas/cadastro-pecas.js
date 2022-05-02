@@ -7,8 +7,8 @@ import SelectMenu from '../../components/selectMenu'
 import { withRouter } from 'react-router-dom'
 import * as messages from '../../components/toastr'
 
-import LancamentoService from '../../app/service/lancamentoService'
 import LocalStorageService from '../../app/service/localstorageService'
+import PecasService from '../../app/service/pecaService'
 
 class CadastroPecas extends React.Component {
 
@@ -26,7 +26,7 @@ class CadastroPecas extends React.Component {
 
     constructor(){
         super();
-        this.service = new LancamentoService();
+        this.service = new PecasService();
     }
 
     componentDidMount(){
@@ -48,10 +48,10 @@ class CadastroPecas extends React.Component {
         const usuarioLogado = LocalStorageService.obterItem('_usuario_logado')
 
         const { descricao, valor, mes, ano, tipo } = this.state;
-        const lancamento = { descricao, valor, mes, ano, tipo, usuario: usuarioLogado.id };
+        const peca = { descricao, valor, mes, ano, tipo, usuario: usuarioLogado.id };
 
         try{
-            this.service.validar(lancamento)
+            this.service.validar(peca)
         }catch(erro){
             const mensagens = erro.mensagens;
             mensagens.forEach(msg => messages.mensagemErro(msg));
@@ -59,10 +59,10 @@ class CadastroPecas extends React.Component {
         }     
 
         this.service
-            .salvar(lancamento)
+            .salvar(peca)
             .then(response => {
                 this.props.history.push('/consulta-pecas')
-                messages.mensagemSucesso('Lançamento cadastrado com sucesso!')
+                messages.mensagemSucesso('Lançamento da Peça cadastrado com sucesso!')
             }).catch(error => {
                 messages.mensagemErro(error.response.data)
             })
@@ -71,10 +71,10 @@ class CadastroPecas extends React.Component {
     atualizar = () => {
         const { descricao, valor, mes, ano, tipo, status, usuario, id } = this.state;
 
-        const lancamento = { descricao, valor, mes, ano, tipo, usuario, status, id };
+        const peca = { descricao, valor, mes, ano, tipo, usuario, status, id };
         
         this.service
-            .atualizar(lancamento)
+            .atualizar(peca)
             .then(response => {
                 this.props.history.push('/consulta-pecas')
                 messages.mensagemSucesso('Peça atualizado com sucesso!')
@@ -95,7 +95,7 @@ class CadastroPecas extends React.Component {
         const meses = this.service.obterListaMeses();
 
         return (
-            <Card title={ this.state.atualizando ? 'Atualização de Lançamento'  : 'Cadastro de Lançamento' }>
+            <Card title={ this.state.atualizando ? 'Atualização de Peças'  : 'Cadastro de Peças' }>
                 <div className="row">
                     <div className="col-md-12">
                         <FormGroup id="inputDescricao" label="Descrição: *" >

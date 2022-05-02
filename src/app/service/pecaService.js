@@ -2,10 +2,10 @@ import ApiService from '../apiservice'
 
 import ErroValidacao from '../exception/ErroValidacao'
 
-export default class LancamentoService extends ApiService {
+export default class PecasService extends ApiService {
 
     constructor(){
-        super('/api/lancamentos')
+        super('/api/pecas')
     }
 
     obterListaMeses(){
@@ -29,8 +29,8 @@ export default class LancamentoService extends ApiService {
     obterListaTipos(){
         return  [
             { label: 'Selecione...', value: '' },
-            { label: 'Despesa' , value : 'DESPESA' },
-            { label: 'Receita' , value : 'RECEITA' }
+            { label: 'Credito' , value : 'CREDITO' },
+            { label: 'Pix' , value : 'PIX' }
         ]
 
     }
@@ -43,26 +43,26 @@ export default class LancamentoService extends ApiService {
         return this.put(`/${id}/atualiza-status`, { status })
     }
 
-    validar(lancamento){
+    validar(peca){
         const erros = [];
 
-        if(!lancamento.ano){
+        if(!peca.ano){
             erros.push("Informe o Ano.")
         }
 
-        if(!lancamento.mes){
+        if(!peca.mes){
             erros.push("Informe o Mês.")
         }
 
-        if(!lancamento.descricao){
+        if(!peca.descricao){
             erros.push("Informe a Descrição.")
         }
 
-        if(!lancamento.valor){
+        if(!peca.valor){
             erros.push("Informe o Valor.")
         }
 
-        if(!lancamento.tipo){
+        if(!peca.tipo){
             erros.push("Informe o Tipo.")
         }
 
@@ -71,35 +71,35 @@ export default class LancamentoService extends ApiService {
         }
     }
 
-    salvar(lancamento){
-        return this.post('/', lancamento);
+    salvar(peca){
+        return this.post('/', peca);
     }
 
-    atualizar(lancamento){
-        return this.put(`/${lancamento.id}`, lancamento);
+    atualizar(peca){
+        return this.put(`/${peca.id}`, peca);
     }
 
-    consultar(lancamentoFiltro){
-        let params = `?ano=${lancamentoFiltro.ano}`
+    consultar(pecaFiltro){
+        let params = `?ano=${pecaFiltro.ano}`
 
-        if(lancamentoFiltro.mes){
-            params = `${params}&mes=${lancamentoFiltro.mes}`
+        if(pecaFiltro.mes){
+            params = `${params}&mes=${pecaFiltro.mes}`
         }
 
-        if(lancamentoFiltro.tipo){
-            params = `${params}&tipo=${lancamentoFiltro.tipo}`
+        if(pecaFiltro.tipo){
+            params = `${params}&tipo=${pecaFiltro.tipo}`
         }
 
-        if(lancamentoFiltro.status){
-            params = `${params}&status=${lancamentoFiltro.status}`
+        if(pecaFiltro.status){
+            params = `${params}&status=${pecaFiltro.status}`
         }
 
-        if(lancamentoFiltro.usuario){
-            params = `${params}&usuario=${lancamentoFiltro.usuario}`
+        if(pecaFiltro.usuario){
+            params = `${params}&usuario=${pecaFiltro.usuario}`
         }
 
-        if(lancamentoFiltro.descricao){
-            params = `${params}&descricao=${lancamentoFiltro.descricao}`
+        if(pecaFiltro.descricao){
+            params = `${params}&descricao=${pecaFiltro.descricao}`
         }
 
         return this.get(params);

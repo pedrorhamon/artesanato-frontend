@@ -4,8 +4,8 @@ import { withRouter } from 'react-router-dom'
 import Card from '../../components/card'
 import FormGroup from '../../components/form-group'
 import SelectMenu from '../../components/selectMenu'
-import LancamentosTable from './lancamentosTable'
-import LancamentoService from '../../app/service/lancamentoService'
+import PecasTable from './pecasTable'
+import PecaService from '../../app/service/pecaService'
 import LocalStorageService from '../../app/service/localstorageService'
 
 import * as messages from '../../components/toastr'
@@ -23,13 +23,13 @@ class ConsultaPecas extends React.Component {
         tipo: '',
         descricao: '',
         showConfirmDialog: false,
-        lancamentoDeletar: {},
-        lancamentos : []
+        pecaDeletar: {},
+        pecas : []
     }
 
     constructor(){
         super();
-        this.service = new LancamentoService();
+        this.service = new PecaService();
     }
 
     buscar = () => {
@@ -40,7 +40,7 @@ class ConsultaPecas extends React.Component {
 
         const usuarioLogado = LocalStorageService.obterItem('_usuario_logado');
 
-        const lancamentoFiltro = {
+        const pecaFiltro = {
             ano: this.state.ano,
             mes: this.state.mes,
             tipo: this.state.tipo,
@@ -49,14 +49,14 @@ class ConsultaPecas extends React.Component {
         }
 
         this.service
-            .consultar(lancamentoFiltro)
+            .consultar(pecaFiltro)
             .then( resposta => {
                 const lista = resposta.data;
                 
                 if(lista.length < 1){
                     messages.mensagemAlert("Nenhum resultado encontrado.");
                 }
-                this.setState({ lancamentos: lista })
+                this.setState({ pecas: lista })
             }).catch( error => {
                 console.log(error)
             })
@@ -66,22 +66,22 @@ class ConsultaPecas extends React.Component {
         this.props.history.push(`/cadastro-pecas/${id}`)
     }
 
-    abrirConfirmacao = (lancamento) => {
-        this.setState({ showConfirmDialog : true, lancamentoDeletar: lancamento  })
+    abrirConfirmacao = (peca) => {
+        this.setState({ showConfirmDialog : true, pecaDeletar: peca  })
     }
 
     cancelarDelecao = () => {
-        this.setState({ showConfirmDialog : false, lancamentoDeletar: {}  })
+        this.setState({ showConfirmDialog : false, pecaDeletar: {}  })
     }
 
     deletar = () => {
         this.service
-            .deletar(this.state.lancamentoDeletar.id)
+            .deletar(this.state.pecaDeletar.id)
             .then(response => {
-                const lancamentos = this.state.lancamentos;
-                const index = lancamentos.indexOf(this.state.lancamentoDeletar)
-                lancamentos.splice(index, 1);
-                this.setState( { lancamentos: lancamentos, showConfirmDialog: false } )
+                const pecas = this.state.pecas;
+                const index = pecas.indexOf(this.state.pecaDeletar)
+                pecas.splice(index, 1);
+                this.setState( { pecas: pecas, showConfirmDialog: false } )
                 messages.mensagemSucesso('Lançamento deletado com sucesso!')
             }).catch(error => {
                 messages.mensagemErro('Ocorreu um erro ao tentar deletar o Lançamento')
@@ -92,16 +92,16 @@ class ConsultaPecas extends React.Component {
         this.props.history.push('/cadastro-pecas')
     }
 
-    alterarStatus = (lancamento, status) => {
+    alterarStatus = (peca, status) => {
         this.service
-            .alterarStatus(lancamento.id, status)
+            .alterarStatus(peca.id, status)
             .then( response => {
-                const lancamentos = this.state.lancamentos;
-                const index = lancamentos.indexOf(lancamento);
+                const pecas = this.state.pecas;
+                const index = pecas.indexOf(peca);
                 if(index !== -1){
-                    lancamento['status'] = status;
-                    lancamentos[index] = lancamento
-                    this.setState({lancamento});
+                    peca['status'] = status;
+                    pecas[index] = peca
+                    this.setState({peca});
                 }
                 messages.mensagemSucesso("Status atualizado com sucesso!")
             })
@@ -177,7 +177,7 @@ class ConsultaPecas extends React.Component {
                 <div className="row">
                     <div className="col-md-12">
                         <div className="bs-component">
-                            <LancamentosTable lancamentos={this.state.lancamentos} 
+                            <PecasTable pecas={this.state.pecas} 
                                               deleteAction={this.abrirConfirmacao}
                                               editAction={this.editar}
                                               alterarStatus={this.alterarStatus} />
