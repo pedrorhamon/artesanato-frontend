@@ -35,10 +35,14 @@ class UsuarioService extends ApiService {
 
         if(!usuario.cpf) {
             erros.push('O campo CPF é obrigatório')
+        } else if(!usuario.cpf.match(/^\d{3}\.\d{3}\.\d{3}\-\d{2}$/)) {
+            erros.push('Informe um CPF válido.')
         }
 
         if(!usuario.celular) {
             erros.push('Campo celular é obrigatório')
+        } else if (!usuario.celular.match(/(\(?\d{2}\)?\s)?(\d{4,5}\-\d{4})/)) {
+            erros.push('Informe um celular válido.')
         }
 
         if(!usuario.senha || !usuario.senhaRepeticao){
