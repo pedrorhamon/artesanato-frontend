@@ -77,6 +77,7 @@ class CadastroUsuario extends React.Component{
                                        placeholder="000.000.000-00"
                                        className="form-control"
                                        name="cpf"
+                                       maxLength="14"
                                        onChange={e => this.setState({cpf: e.target.value})} />
                             </FormGroup>
                             <FormGroup label="Celular: *" htmlFor="inputCelular">
@@ -85,6 +86,7 @@ class CadastroUsuario extends React.Component{
                                        placeholder="(00) 00000-0000"
                                        className="form-control"
                                        name="celular"
+                                       maxLength="15"
                                        onChange={e => this.setState({celular: e.target.value})} />
                             </FormGroup>
                             <FormGroup label="Senha: *" htmlFor="inputSenha">

@@ -25,6 +25,8 @@ class UsuarioService extends ApiService {
 
         if(!usuario.nome){
             erros.push('O campo Nome é obrigatório.')
+        } else if(!usuario.nome.match(/^[a-zA-Z\s]+$/)) {
+            erros.push('Informe o nome, somente letras')
         }
 
         if(!usuario.email){
@@ -46,7 +48,7 @@ class UsuarioService extends ApiService {
         }
 
         if(!usuario.senha || !usuario.senhaRepeticao){
-            erros.push('Digite a senha 2x.')
+            erros.push('Digite a senha novamente.')
         }else if( usuario.senha !== usuario.senhaRepeticao ){
             erros.push('As senhas não batem.')
         }        

@@ -48,6 +48,8 @@ export default class PecasService extends ApiService {
 
         if(!peca.ano){
             erros.push("Informe o Ano.")
+        } else if (!peca.ano.match(/[0-9]{4}/)) {
+            erros.push('Digite um ano válido.')
         }
 
         if(!peca.mes){
@@ -56,10 +58,14 @@ export default class PecasService extends ApiService {
 
         if(!peca.descricao){
             erros.push("Informe a Descrição.")
+        }else if(!peca.descricao.match(/^[a-zA-Z\s]+$/)) {
+            erros.push('Informe a Descrição, somente letras')
         }
 
         if(!peca.valor){
             erros.push("Informe o Valor.")
+        } else if (!peca.valor.match(/^[0-9]{1,}$/)) {
+            erros.push('Informe um valor válido.')
         }
 
         if(!peca.tipo){

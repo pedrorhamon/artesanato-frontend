@@ -82,7 +82,7 @@ class ConsultaPecas extends React.Component {
                 const index = pecas.indexOf(this.state.pecaDeletar)
                 pecas.splice(index, 1);
                 this.setState( { pecas: pecas, showConfirmDialog: false } )
-                messages.mensagemSucesso('Lançamento deletado com sucesso!')
+                messages.mensagemSucesso('Peça deletada com sucesso!')
             }).catch(error => {
                 messages.mensagemErro('Ocorreu um erro ao tentar deletar a Peça')
             })
@@ -125,9 +125,10 @@ class ConsultaPecas extends React.Component {
                     <div className="col-md-6">
                         <div className="bs-component">
                             <FormGroup htmlFor="inputAno" label="Ano: *">
-                                <input type="text" 
+                                <input type="number" 
                                        className="form-control" 
                                        id="inputAno" 
+                                       maxLength='4'
                                        value={this.state.ano}
                                        onChange={e => this.setState({ano: e.target.value})}
                                        placeholder="Digite o Ano" />

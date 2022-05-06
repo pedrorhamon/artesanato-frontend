@@ -112,10 +112,11 @@ class CadastroPecas extends React.Component {
                     <div className="col-md-6">
                         <FormGroup id="inputAno" label="Ano: *">
                             <input id="inputAno" 
-                                   type="text"
+                                   type="number"
                                    name="ano"
                                    placeholder='insira o ano'
                                    value={this.state.ano}
+                                   maxLength="4"
                                    onChange={this.handleChange} 
                                    className="form-control" />
                         </FormGroup>
@@ -136,7 +137,7 @@ class CadastroPecas extends React.Component {
                     <div className="col-md-4">
                          <FormGroup id="inputValor" label="Valor: *">
                             <input id="inputValor" 
-                                   type="text"
+                                   type="number"
                                    name="valor"
                                    placeholder='insira o valor'
                                    value={this.state.valor}
