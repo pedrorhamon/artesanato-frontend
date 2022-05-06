@@ -102,6 +102,7 @@ class CadastroPecas extends React.Component {
                             <input id="inputDescricao" type="text" 
                                    className="form-control" 
                                    name="descricao"
+                                   placeholder='insira a descrição'
                                    value={this.state.descricao}
                                    onChange={this.handleChange}  />
                         </FormGroup>
@@ -113,6 +114,7 @@ class CadastroPecas extends React.Component {
                             <input id="inputAno" 
                                    type="text"
                                    name="ano"
+                                   placeholder='insira o ano'
                                    value={this.state.ano}
                                    onChange={this.handleChange} 
                                    className="form-control" />
@@ -124,6 +126,7 @@ class CadastroPecas extends React.Component {
                                         value={this.state.mes}
                                         onChange={this.handleChange}
                                         lista={meses} 
+                                        placeholder='Selecione'
                                         name="mes"
                                         className="form-control" />
                         </FormGroup>
@@ -135,6 +138,7 @@ class CadastroPecas extends React.Component {
                             <input id="inputValor" 
                                    type="text"
                                    name="valor"
+                                   placeholder='insira o valor'
                                    value={this.state.valor}
                                    onChange={this.handleChange} 
                                    className="form-control" />

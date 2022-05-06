@@ -37,7 +37,7 @@ class ConsultaPecas extends React.Component {
             messages.mensagemErro('O preenchimento do campo Ano é obrigatório.')
             return false;
         }
-
+  
         const usuarioLogado = LocalStorageService.obterItem('_usuario_logado');
 
         const pecaFiltro = {
@@ -84,7 +84,7 @@ class ConsultaPecas extends React.Component {
                 this.setState( { pecas: pecas, showConfirmDialog: false } )
                 messages.mensagemSucesso('Lançamento deletado com sucesso!')
             }).catch(error => {
-                messages.mensagemErro('Ocorreu um erro ao tentar deletar o Lançamento')
+                messages.mensagemErro('Ocorreu um erro ao tentar deletar a Peça')
             })
     }
 

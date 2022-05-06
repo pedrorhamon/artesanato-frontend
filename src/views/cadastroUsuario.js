@@ -58,6 +58,7 @@ class CadastroUsuario extends React.Component{
                             <FormGroup label="Nome: *" htmlFor="inputNome">
                                 <input type="text" 
                                        id="inputNome" 
+                                       placeholder="insira seu nome completo"
                                        className="form-control"
                                        name="nome"
                                        onChange={e => this.setState({nome: e.target.value})} />
@@ -65,6 +66,7 @@ class CadastroUsuario extends React.Component{
                             <FormGroup label="Email: *" htmlFor="inputEmail">
                                 <input type="email" 
                                        id="inputEmail"
+                                       placeholder="insira seu email"
                                        className="form-control"
                                        name="email"
                                        onChange={e => this.setState({email: e.target.value})} />
@@ -88,6 +90,7 @@ class CadastroUsuario extends React.Component{
                             <FormGroup label="Senha: *" htmlFor="inputSenha">
                                 <input type="password" 
                                        id="inputSenha"
+                                       placeholder="insira a senha"
                                        className="form-control"
                                        name="senha"
                                        onChange={e => this.setState({senha: e.target.value})} />
@@ -95,6 +98,7 @@ class CadastroUsuario extends React.Component{
                             <FormGroup label="Confirme a Senha: *" htmlFor="inputConfirmaSenha">
                                 <input type="password" 
                                        id="inputConfirmaSenha"
+                                       placeholder="insira a senha novamente"
                                        className="form-control"
                                        name="senha"
                                        onChange={e => this.setState({senhaRepeticao: e.target.value})} />
