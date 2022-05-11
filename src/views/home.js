@@ -5,10 +5,6 @@ import { AuthContext } from '../main/provedorAutenticacao'
 
 class Home extends React.Component{
 
-    state = {
-        saldo: 0
-    }
-
     constructor(){
         super()
         this.usuarioService = new UsuarioService();
